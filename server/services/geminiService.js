@@ -228,43 +228,4 @@ exports.generateMarketingStrategy = async (business, budget, timeframe, goals) =
     console.error('Error generating marketing strategy with Gemini:', error);
     throw new Error('Failed to generate marketing strategy');
   }
-};
-
-// Generate ad options using Gemini AI
-exports.generateAdOptions = async (adFormat, description, advertisementGoals, targetAudience) => {
-  try {
-    // Get the model
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    
-    // Create the prompt
-    const prompt = `
-    Create three distinct advertisement options in **${adFormat}** format for the following product or business:
-
-    **Description:** ${description}
-    **Advertisement Goals:** ${advertisementGoals}
-    **Target Audience:** ${targetAudience}
-
-    Ensure the ads align with the given goals and target audience.
-    
-    Label each option clearly as:
-    ## Option 1:
-    ## Option 2:
-    ## Option 3:
-    `;
-    
-    // Generate content
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    
-    // Extract options using regex
-    const options = text.split(/## Option \d+:/g)
-      .filter(option => option.trim().length > 0)
-      .map(option => option.trim());
-    
-    return options;
-  } catch (error) {
-    console.error('Gemini AI API error:', error);
-    throw new Error('Failed to generate ad options with Gemini AI');
-  }
 }; 

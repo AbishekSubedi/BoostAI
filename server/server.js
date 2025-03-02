@@ -26,10 +26,23 @@ app.use(express.json());
 // Set environment
 process.env.NODE_ENV = 'development';
 
-// Initialize SQLite database
-const db = require('./config/db');
-db.init();
-console.log('Using SQLite database');
+// Connect to MongoDB
+mongoose.connect(config.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => {
+    console.error('Failed to connect to MongoDB:', err);
+    
+    // Set up a retry mechanism
+    console.log('Retrying connection in 5 seconds...');
+    setTimeout(() => {
+      mongoose.connect(config.MONGODB_URI)
+        .then(() => console.log('Connected to MongoDB on retry'))
+        .catch(retryErr => {
+          console.error('Failed to connect to MongoDB on retry:', retryErr);
+          console.log('Using in-memory fallback for development');
+        });
+    }, 5000);
+  });
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -60,31 +73,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Try different ports if the default one is in use
-const tryPort = (port) => {
-  // Convert port to number to ensure proper incrementing
-  port = Number(port);
-  
-  // Validate port number
-  if (isNaN(port) || port < 0 || port >= 65536) {
-    console.error(`Invalid port number: ${port}. Using default port 3000.`);
-    port = 3000;
-  }
-  
-  const server = app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-  });
-
-  server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-      console.log(`Port ${port} is busy, trying ${port + 1}...`);
-      // Properly increment port as a number
-      tryPort(port + 1);
-    } else {
-      console.error('Server error:', err);
-    }
-  });
-};
-
-const PORT = process.env.PORT || 5001;
-tryPort(PORT); 
+const PORT = config.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+}); 

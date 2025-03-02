@@ -135,7 +135,7 @@ const GenerateWebsite = () => {
         
         <div className="action-buttons">
           <button 
-            className="btn btn-primary" 
+            className="btn btn-primary"
             onClick={generateWebsitePreview}
             disabled={generating}
           >

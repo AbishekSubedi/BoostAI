@@ -1,107 +1,76 @@
 const Business = require('../models/Business');
 const geminiService = require('../services/geminiService');
-const config = require('../config/config');
-const fs = require('fs');
-const path = require('path');
+const openaiService = require('../services/openaiService');
+const runwayService = require('../services/runwayService');
 
 // Generate text ad
 exports.generateTextAd = async (req, res) => {
   try {
-    const { description, adType, adPurpose, targetAudience, businessId, responseId } = req.body;
+    // Get business info
+    const business = await Business.findOne({ userId: req.user.id });
     
-    // Generate ad options using Gemini AI
-    const options = await geminiService.generateAdOptions(
-      'text',
-      description,
-      adPurpose,
-      targetAudience
-    );
+    if (!business) {
+      return res.status(404).json({ message: 'Business not found' });
+    }
     
-    return res.json({
-      success: true,
-      textAd: options[0], // Use the first option by default
-      allOptions: options // Send all options
-    });
-  } catch (error) {
-    console.error('Error generating text ad:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Error generating text ad'
-    });
+    // Generate ad content
+    const adContent = await geminiService.generateAdContent(business);
+    
+    res.json({ adContent });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
 // Generate image ad
 exports.generateImageAd = async (req, res) => {
   try {
-    const { description, adType, adPurpose, targetAudience, businessId, responseId } = req.body;
+    // Get business info
+    const business = await Business.findOne({ userId: req.user.id });
     
-    // Generate ad options using Gemini AI
-    const concepts = await geminiService.generateAdOptions(
-      'image',
-      description,
-      adPurpose,
-      targetAudience
-    );
+    if (!business) {
+      return res.status(404).json({ message: 'Business not found' });
+    }
     
-    // For now, we'll return placeholder images with the concepts
-    const imageOptions = concepts.map((concept, index) => {
-      return {
-        text: concept,
-        imageUrl: `https://via.placeholder.com/600x400?text=Ad+Concept+${index + 1}`,
-        caption: `Advertisement concept based on your business description`
-      };
-    });
+    // Generate image prompt
+    const imagePrompt = await geminiService.generateImagePrompt(business);
     
-    return res.json({
-      success: true,
-      imageUrl: imageOptions[0].imageUrl, // Use the first option by default
-      caption: imageOptions[0].text,
-      allOptions: imageOptions // Send all options
-    });
-  } catch (error) {
-    console.error('Error generating image ad:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Error generating image ad'
-    });
+    // Generate image
+    const imageUrl = await openaiService.generateImage(imagePrompt);
+    
+    // Generate ad content
+    const adContent = await geminiService.generateAdContent(business);
+    
+    res.json({ imageUrl, adContent, prompt: imagePrompt });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
 // Generate video ad
 exports.generateVideoAd = async (req, res) => {
   try {
-    const { description, adType, adPurpose, targetAudience, businessId, responseId } = req.body;
+    // Get business info
+    const business = await Business.findOne({ userId: req.user.id });
     
-    // Generate ad options using Gemini AI
-    const concepts = await geminiService.generateAdOptions(
-      'video',
-      description,
-      adPurpose,
-      targetAudience
-    );
+    if (!business) {
+      return res.status(404).json({ message: 'Business not found' });
+    }
     
-    // For now, we'll return placeholder videos with the concepts
-    const videoOptions = concepts.map((concept, index) => {
-      return {
-        script: concept,
-        videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', // Sample video
-        thumbnail: `https://via.placeholder.com/600x400?text=Video+Concept+${index + 1}`
-      };
-    });
+    // Generate video prompt
+    const videoPrompt = await geminiService.generateVideoPrompt(business);
     
-    return res.json({
-      success: true,
-      videoUrl: videoOptions[0].videoUrl, // Use the first option by default
-      script: videoOptions[0].script,
-      thumbnail: videoOptions[0].thumbnail,
-      allOptions: videoOptions // Send all options
-    });
-  } catch (error) {
-    console.error('Error generating video ad:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Error generating video ad'
-    });
+    // Generate video
+    const videoUrl = await runwayService.generateVideo(videoPrompt);
+    
+    // Generate ad content
+    const adContent = await geminiService.generateAdContent(business);
+    
+    res.json({ videoUrl, adContent, prompt: videoPrompt });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 }; 

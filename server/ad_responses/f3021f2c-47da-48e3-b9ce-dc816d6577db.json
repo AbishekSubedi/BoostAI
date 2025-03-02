@@ -1,0 +1,35 @@
+{
+  "userId": "dWIOIVyLHbet1tmdwBpqQSdHSfn2",
+  "businessId": "business-123",
+  "timestamp": "2025-03-02T04:05:27.392992",
+  "request": {
+    "userId": "dWIOIVyLHbet1tmdwBpqQSdHSfn2",
+    "businessId": "business-123",
+    "businessName": "Demo Business",
+    "adType": "image",
+    "description": "Demo Business is a Technology business. A demo business for testing",
+    "adPurpose": "Promote a specific product or service",
+    "targetAudience": "Youth"
+  },
+  "response": {
+    "options": [
+      {
+        "headline": "Discover the Perfect Solution for Your Needs",
+        "image": "A professional showcasing Demo Business is a Technology business. A demo business for testing to Youth with visible results that achieve Promote a specific product or service"
+      },
+      {
+        "headline": "Transform Your Experience Today",
+        "image": "Before and after comparison showing how Demo Business is a Technology business. A demo business for testing benefits Youth to Promote a specific product or service"
+      },
+      {
+        "headline": "Join Thousands of Happy Customers",
+        "image": "A diverse group of Youth enjoying the benefits of Demo Business is a Technology business. A demo business for testing that helps them Promote a specific product or service"
+      }
+    ],
+    "selectedOption": {
+      "headline": "Discover the Perfect Solution for Your Needs",
+      "image": "A professional showcasing Demo Business is a Technology business. A demo business for testing to Youth with visible results that achieve Promote a specific product or service"
+    },
+    "imageBase64": null
+  }
+}

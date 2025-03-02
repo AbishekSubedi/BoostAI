@@ -98,76 +98,19 @@ export const generateSocialMediaGuide = async (socialData) => {
 };
 
 // Ad API calls
-export const generateTextAd = async (adDetails) => {
-  try {
-    const response = await fetch('http://localhost:5005/api/ads/text', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...adDetails,
-        user_id: localStorage.getItem('userId') || 'anonymous'
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to generate text ad');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error generating text ad:', error);
-    throw error;
-  }
+export const generateTextAd = async () => {
+  const response = await api.post('/ads/text');
+  return response.data;
 };
 
-export const generateImageAd = async (adDetails) => {
-  try {
-    const response = await fetch('http://localhost:5005/api/ads/image', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...adDetails,
-        user_id: localStorage.getItem('userId') || 'anonymous'
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to generate image ad');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error generating image ad:', error);
-    throw error;
-  }
+export const generateImageAd = async () => {
+  const response = await api.post('/ads/image');
+  return response.data;
 };
 
-export const generateVideoAd = async (adDetails) => {
-  try {
-    const response = await fetch('http://localhost:5005/api/ads/video', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...adDetails,
-        user_id: localStorage.getItem('userId') || 'anonymous'
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to generate video ad');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error generating video ad:', error);
-    throw error;
-  }
+export const generateVideoAd = async () => {
+  const response = await api.post('/ads/video');
+  return response.data;
 };
 
 // Marketing API calls
@@ -194,69 +137,6 @@ export const createBusinessSimple = async (businessData) => {
     return response.data;
   } catch (error) {
     console.error('API error creating business (simple):', error.response || error);
-    throw error;
-  }
-};
-
-// Generate advertisement options
-export const generateAds = async (adDetails) => {
-  try {
-    const response = await fetch('http://localhost:5005/generate-ads', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(adDetails),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to generate ads');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error generating ads:', error);
-    throw error;
-  }
-};
-
-// Save ad generation responses to server
-export const saveAdResponses = async (responses) => {
-  try {
-    const userId = localStorage.getItem('userId') || 'anonymous';
-    const response = await fetch(`http://localhost:5005/api/ads/responses/${userId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ responses }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to save ad responses');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error saving ad responses:', error);
-    throw error;
-  }
-};
-
-// Get saved ad responses from server
-export const getAdResponses = async () => {
-  try {
-    const userId = localStorage.getItem('userId') || 'anonymous';
-    const response = await fetch(`http://localhost:5005/api/ads/responses/${userId}`);
-    
-    if (!response.ok) {
-      throw new Error('Failed to get ad responses');
-    }
-    
-    const data = await response.json();
-    return data.responses;
-  } catch (error) {
-    console.error('Error getting ad responses:', error);
     throw error;
   }
 };

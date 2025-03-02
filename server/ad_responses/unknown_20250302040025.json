@@ -1,0 +1,35 @@
+{
+  "userId": "unknown",
+  "businessId": "business-123",
+  "timestamp": "2025-03-02T04:00:25.713977",
+  "request": {
+    "userId": "unknown",
+    "businessId": "business-123",
+    "businessName": "Demo Business",
+    "adType": "video",
+    "description": "Demo Business is a Technology business. A demo business for testing",
+    "adPurpose": "Promote a specific product or service",
+    "targetAudience": "Youth"
+  },
+  "response": {
+    "options": [
+      {
+        "headline": "Discover the Perfect Solution for Youth",
+        "image": "A satisfied customer using the product with a smile. Demo Business is a Technology business. A demo business for testing"
+      },
+      {
+        "headline": "Transform Your Experience with Our Promote a specific product or service Solution",
+        "image": "Before and after comparison showing the benefits. Demo Business is a Technology business. A demo business for testing"
+      },
+      {
+        "headline": "Join Thousands of Happy Customers",
+        "image": "A group of diverse people enjoying the product or service. Demo Business is a Technology business. A demo business for testing"
+      }
+    ],
+    "selectedOption": {
+      "headline": "Discover the Perfect Solution for Youth",
+      "image": "A satisfied customer using the product with a smile. Demo Business is a Technology business. A demo business for testing"
+    },
+    "imageBase64": null
+  }
+}

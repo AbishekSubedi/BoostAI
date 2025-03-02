@@ -1,0 +1,35 @@
+{
+  "userId": "dWIOIVyLHbet1tmdwBpqQSdHSfn2",
+  "businessId": "business-123",
+  "timestamp": "2025-03-02T04:11:13.217809",
+  "request": {
+    "userId": "dWIOIVyLHbet1tmdwBpqQSdHSfn2",
+    "businessId": "business-123",
+    "businessName": "Demo Business",
+    "adType": "image",
+    "description": "A new AI-powered fitness app that creates personalized workout plans and tracks progress using machine learning.",
+    "adPurpose": "Promote a specific product or service",
+    "targetAudience": "Youth"
+  },
+  "response": {
+    "options": [
+      {
+        "headline": "Discover the Perfect Solution for Your Needs",
+        "image": "A professional showcasing A new AI-powered fitness app that creates personalized workout plans and tracks progress using machine learning. to Youth with visible results that achieve Promote a specific product or service"
+      },
+      {
+        "headline": "Transform Your Experience Today",
+        "image": "Before and after comparison showing how A new AI-powered fitness app that creates personalized workout plans and tracks progress using machine learning. benefits Youth to Promote a specific product or service"
+      },
+      {
+        "headline": "Join Thousands of Happy Customers",
+        "image": "A diverse group of Youth enjoying the benefits of A new AI-powered fitness app that creates personalized workout plans and tracks progress using machine learning. that helps them Promote a specific product or service"
+      }
+    ],
+    "selectedOption": {
+      "headline": "Discover the Perfect Solution for Your Needs",
+      "image": "A professional showcasing A new AI-powered fitness app that creates personalized workout plans and tracks progress using machine learning. to Youth with visible results that achieve Promote a specific product or service"
+    },
+    "imageBase64": null
+  }
+}

@@ -10,7 +10,6 @@ import GenerateWebsite from './components/services/GenerateWebsite';
 import SocialMediaGuide from './components/services/SocialMediaGuide';
 import GenerateAd from './components/services/GenerateAd';
 import MarketingStrategy from './components/services/MarketingStrategy';
-import GenerateAds from './components/services/GenerateAds';
 import './App.css';
 
 // Private route component that checks if user is authenticated
@@ -102,14 +101,6 @@ function App() {
               <BusinessRequiredRoute>
                 <MarketingStrategy />
               </BusinessRequiredRoute>
-            } 
-          />
-          <Route 
-            path="/services/generate-ads" 
-            element={
-              <PrivateRoute>
-                <GenerateAds />
-              </PrivateRoute>
             } 
           />
         </Routes>
