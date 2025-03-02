@@ -1,1 +1,36 @@
-node_modules
+# Node modules
+node_modules/
+*/node_modules/
+
+# Build directories
+build/
+dist/
+*/build/
+*/dist/
+
+# Environment variables
+.env
+*/.env
+
+# Large files
+*.mp4
+*.mov
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+# Cache
+.cache/
+.npm/
+.eslintcache
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
