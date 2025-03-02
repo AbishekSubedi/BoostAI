@@ -61,7 +61,7 @@ npm run dev
 - Node.js/Express server
 - RESTful API architecture
 - Modular structure with separate routes, controllers, and services
-- Database integration (specify your database)
+- Database integration (PostSQL)
 - Ad response handling system
 
 ### Ad Service
