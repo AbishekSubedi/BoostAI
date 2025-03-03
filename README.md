@@ -80,8 +80,4 @@ npm run dev
 
 ## License
 
-ISC License
-
-## Support
-
-For support, please contact [your contact information] 
+ISC License 
